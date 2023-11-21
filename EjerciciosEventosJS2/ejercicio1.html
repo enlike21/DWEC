@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+<!--     En el evento input (oninput) del input type text habrá que
+    comprobar que hay algo, que es un número positivo y entero, y solo
+    entonces se muestra el botón calcular. El cálculo será el factorial del
+    número que se le ha introducido. Cuando no es así no debe
+    aparecer el botón. El resultado se mostrará en una etiqueta fuera
+    del formulario. -->
+    
+    <input type="text" oninput="comprobacion()" id="numero">
+    <script>
+
+        function comprobacion(){
+            var numero=parseInt(document.getElementById("numero").value);
+            
+            if(isNaN(numero)|| numero==""){
+                window.alert("Porfavor escribe un numero");
+            }
+            else if(numero<0){
+                window.alert("El numero tiene que ser positivo");
+            }
+            else{
+                var boton = document.createElement("button");
+                boton.innerHTML = "Haz click";
+                document.body.appendChild(boton);
+                boton.addEventListener("click", function() {
+                    
+                    var resultado = 1;
+                    for (var i = 1; i <= numero; i++) {
+                        resultado *= i;
+                    }
+                    var h1 = document.createElement("h1");
+                    h1.innerHTML = "El factorial de " + numero + " es: " + resultado;
+                    document.body.appendChild(h1);
+                    
+
+});
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>

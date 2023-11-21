@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cambiar imagen</title>
+    <style>
+        #imagen {
+            width: 700px;
+            height: 700px;
+        }
+        img{
+            width: 50px;
+        }
+        #volver{
+            font-weight: bold;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="cambiarImagen('descarga.jpg')"><img src="descarga.jpg"></button>
+    <button onclick="cambiarImagen('Bolsa_de_Rakuten_02.jpg')"><img src="Bolsa_de_Rakuten_02.jpg"></button>
+    <button onclick="cambiarImagen('Chicote.jpg')"><img src="Chicote.jpg"></button>
+    <button id="volver" onclick="volver('albertochicote.jpg')">Volver a la original</button>
+    <br>
+    <img id="imagen" src="albertochicote.jpg">
+    <script>
+        function cambiarImagen(rutaImagen) {
+            document.getElementById("imagen").src = rutaImagen;
+        }
+        function volver(rutaImagen) {
+            document.getElementById("imagen").src=rutaImagen;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <!-- Al terminar de cargarse la página debe aparecer un prompt pidiendo
+que escribas una palabra. Hay que comprobar que el usuario no
+haya pulsado el botón cancelar y después, que lo que devuelve el
+prompt no sea la cadena vacía. Si todo está correcto, se cambiará el
+título de la página por lo que se haya escrito en el prompt.
+-->
+
+<script>
+    
+    window.onload = function() {
+        let titulo;
+    
+        do{
+            titulo=prompt("Dime un nuevo titulo");
+        }
+        while(titulo=null||titulo.trim()===""){
+            document.title=titulo;
+        };
+    }
+        
+
+</script>
+
+</body>
+</html>

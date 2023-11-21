@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cambiar color de fondo y texto</title>
+    <style>
+        #parrafo {
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="cambiarColor('red')">Rojo</button>
+    <button onclick="cambiarColor('green')">Verde</button>
+    <button onclick="cambiarColor('blue')">Azul</button>
+
+    <p id="parrafo">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+    <script>
+        function cambiarColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+    </script>
+</body>
+</html>
