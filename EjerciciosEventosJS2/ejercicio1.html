@@ -16,39 +16,36 @@
     aparecer el botón. El resultado se mostrará en una etiqueta fuera
     del formulario. -->
     
-    <input type="text" oninput="comprobacion()" id="numero">
-    <script>
+<input type="text" oninput="comprobacion()" id="numero">
+<div id="boton"></div>
 
-        function comprobacion(){
-            var numero=parseInt(document.getElementById("numero").value);
-            
-            if(isNaN(numero)|| numero==""){
-                window.alert("Porfavor escribe un numero");
-            }
-            else if(numero<0){
-                window.alert("El numero tiene que ser positivo");
-            }
-            else{
-                var boton = document.createElement("button");
-                boton.innerHTML = "Haz click";
-                document.body.appendChild(boton);
-                boton.addEventListener("click", function() {
-                    
-                    var resultado = 1;
-                    for (var i = 1; i <= numero; i++) {
-                        resultado *= i;
-                    }
-                    var h1 = document.createElement("h1");
-                    h1.innerHTML = "El factorial de " + numero + " es: " + resultado;
-                    document.body.appendChild(h1);
-                    
+<script>
+    function comprobacion() {
+        var numero = parseInt(document.getElementById("numero").value);
+        if (isNaN(numero) || numero == "") {
+            window.alert("Por favor escribe un número");
+        } else if (numero < 0) {
+            window.alert("El número tiene que ser positivo");
+        } else {
+            var botondiv = document.getElementById("boton");
+            botondiv.innerHTML = "";
 
-});
+            var boton = document.createElement("button");
+            boton.innerHTML = "Haz click";
+            botondiv.appendChild(boton);
 
-            }
+            boton.addEventListener("click", function() {
+                var resultado = 1;
+                for (var i = 1; i <= numero; i++) {
+                    resultado *= i;
+                }
+                var h1 = document.createElement("h1");
+                h1.innerHTML = "El factorial de " + numero + " es: " + resultado;
+                document.body.appendChild(h1);
+            });
         }
-
-    </script>
+    }
+</script>
 
 </body>
 </html>

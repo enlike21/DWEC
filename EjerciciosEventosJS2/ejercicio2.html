@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body onload="asignarvalores()">
+<!--Realiza un ejercicio en el que partiendo de un documento html con 6
+div´s con width, height y un color de fondo diferente. Al hacer click
+sobre cada uno de ellos se debe mostrar en el body el color del que
+se ha pulsado. -->
+
+    <div onclick="quecolores(this.style.backgroundColor)"></div>
+    <div onclick="quecolores(this.style.backgroundColor)"></div>
+    <div onclick="quecolores(this.style.backgroundColor)"></div>
+    <div onclick="quecolores(this.style.backgroundColor)"></div>
+    <div onclick="quecolores(this.style.backgroundColor)"></div>
+    <div onclick="quecolores(this.style.backgroundColor)"></div>
+
+
+    <script>
+        function numeroaleatorio(){
+            let numero = Math.random() * 333+ 1; // Genera un número aleatorio entre 1 y 333
+            return numero;
+        }
+
+        function asignarvalores() {
+            let arraydecolores = ["red", "blue", "green", "yellow", "grey", "black"];
+            let allDivs = document.getElementsByTagName("div");
+
+            for (i = 0; i < 7; i++) {
+                arraydecolores.sort(function () {
+                return Math.random() - 0.5;
+                });
+
+                var color = arraydecolores.shift();
+                allDivs[i].style.backgroundColor = color;
+                allDivs[i].style.width = numeroaleatorio() + "px";
+                allDivs[i].style.height = numeroaleatorio() + "px";
+
+            }
+}
+
+        function quecolores(colores){
+            var h1 = document.createElement("h1");
+            h1.innerHTML = "El color es: " + colores;
+            document.body.appendChild(h1);
+        }
+        
+    </script>
+</body>
+</html>
