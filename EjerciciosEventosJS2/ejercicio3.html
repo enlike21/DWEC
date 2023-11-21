@@ -15,7 +15,7 @@
     del click del contenedor, se deberá escribir en otra pantalla el
     número que se ha pulsado. -->
     
-    <div>
+    <div onclick="mostrarNumero()">
         <div></div>
         <div></div>
         <div></div>
@@ -27,6 +27,22 @@
         <div></div>
         <div></div>
     </div>
+    <p id="pantalla"></p>
+    <script>
+
+        
+        let allDivs = document.getElementsByTagName("div");
+        for (let i = 1; i < allDivs.length; i++) {
+            var random_numero = Math.floor(Math.random() * 10);
+            allDivs[i].innerHTML = random_numero;
+        }
+
+        function mostrarNumero() {
+        let numeroPulsado = event.target.innerHTML;
+        document.getElementById("pantalla").innerHTML = "Número pulsado: " + numeroPulsado;
+        }
+
+    </script>
 
 </body>
 </html>

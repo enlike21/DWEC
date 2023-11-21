@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body onload="numerosaleatorios()">
+<!--     Genera números aleatorios del 0 al 9 sin que se repitan. En load de
+window escribiendo los 10 números en una etiqueta del body que se
+añadirá después de generar los números (creando el elemento con
+Javascript). -->
+
+<script>
+function numerosaleatorios() {
+  var numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  var numerosAleatorios = [];
+
+  while (numeros.length > 0) {
+    var indiceAleatorio = Math.floor(Math.random() * numeros.length);
+    var numeroAleatorio = numeros[indiceAleatorio];
+  }
+
+  return numerosAleatorios;
+}
+</script>
+
+</body>
+</html>
