@@ -66,8 +66,12 @@ querySelector y querySelectorAll. -->
         //TERCERA PARTE, Selecciona ahora el 4º li de la ol. Selecciona ahora los 2 últimos li de cada lista. Si quieres haz que cada apartado se haga al pulsar click sobre un botón. Todas las selecciones hazlas con
         //querySelector y querySelectorAll.
 
-        
+        let cuarto_li = document.querySelector("ol li:nth-child(4)");
+        // Seleccionar los dos últimos elementos li de la lista desordenada
+        let ult_ul_items = document.querySelectorAll("ul li:nth-last-child(-n+2)");
 
+        // Seleccionar los dos últimos elementos li de la lista ordenada
+        let ult_ol_items = document.querySelectorAll("ol li:nth-last-child(-n+2)");
     </script>
 
 </body>
