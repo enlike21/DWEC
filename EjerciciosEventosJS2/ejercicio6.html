@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+
+<!--     De los elementos que están en la lista ordenada, selecciona todos
+los de la lista y después escribe el contenido que tengan en el div
+que tiene de clase ordenada. Realiza el mismo ejercicio anterior,
+cogiendo de la lista ordenada primeros los pares y después los
+impares. Realiza de nuevo el ejercicio pero esta vez cogiendo todos
+los elementos li. Selecciona ahora el 4º li de la ol. Selecciona ahora
+los 2 últimos li de cada lista. Si quieres haz que cada apartado se
+haga al pulsar click sobre un botón. Todas las selecciones hazlas con
+querySelector y querySelectorAll. -->
+
+    <ul>
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+        <li>d</li>
+        <li>e</li>
+        <li>f</li>
+        <li>g</li>
+    </ul>
+    <ol>
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+        <li>444</li>
+        <li>555</li>
+        <li>666</li>
+        <li>777</li>
+    </ol>
+    <div class="ordenada">
+
+    </div>
+
+    <script>
+        let listaordenada = document.getElementsByTagName("ol")[0];
+        let all_li = listaordenada.getElementsByTagName("li");
+        let div         = document.getElementsByClassName("ordenada")[0];
+
+        //PRIMERA PARTE, AQUI SOLO MUESTRO LA TABLA ORDENADA EN EL DIV
+/*         for(let i = 0; i < all_li.length; i++) {
+            let contenidoLi = all_li[i].innerText;
+            div.innerHTML += contenidoLi + "<br>";
+        } */
+
+        //SEGUNDA PARTE, Realiza el mismo ejercicio anterior, cogiendo de la lista ordenada primeros los pares y después los impares.
+/*         for(let i = 1; i < all_li.length; i+=2) {
+            let contenidoLi = all_li[i].innerText;
+            div.innerHTML += contenidoLi + "<br>";
+        }
+        for(let i = 0; i < all_li.length; i+=2) {
+            let contenidoLi = all_li[i].innerText;
+            div.innerHTML += contenidoLi + "<br>";
+        } */
+
+        //TERCERA PARTE, Selecciona ahora el 4º li de la ol. Selecciona ahora los 2 últimos li de cada lista. Si quieres haz que cada apartado se haga al pulsar click sobre un botón. Todas las selecciones hazlas con
+        //querySelector y querySelectorAll.
+
+        
+
+    </script>
+
+</body>
+</html>
