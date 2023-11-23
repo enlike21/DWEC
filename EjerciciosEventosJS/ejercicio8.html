@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Tabla de multiplicar</h1>
-    <input type="number" id="numero" min="1" max="9">
+    <input type="number" id="numero" min="0" max="9">
     <button onclick="generarTabla()">Generar tabla</button>
     <br>
     <span id="error" style="color: red;"></span>
@@ -16,7 +16,7 @@
         function generarTabla() {
             var numero = parseInt(document.getElementById("numero").value);
 
-            if (numero >= 1 && numero <= 9) {
+            if (numero >= 0 && numero <= 9) {
                 setTimeout(function() {
                     var tabla = "";
                     for (var i = 1; i <= 10; i++) {
