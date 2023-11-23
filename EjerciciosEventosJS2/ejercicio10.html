@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+    <!--     Realiza un ejercicio en el que partiendo de un documento html
+con texto en varios elementos del mismo tipo, al pulsar en un botón
+se realice un búsqueda en el contenido de esos elementos de una
+determinada cadena de texto. Si se encuentra, se debe sustituir por
+la palabra “NO” (en negrita mediante etiqueta html). Además se
+debe crear un elemento span y añadirlo al elemento en el que se ha
+encontrado la cadena prohibida. El contenido del elemento span
+será la longitud de la cadena encontrada. -->
+
+    <p id="texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quae sequi ab at, perferendis
+        doloribus saepe, molestiae quis consectetur voluptatum culpa quas nam eaque totam exercitationem officia.
+        Ratione, tempora obcaecati.</p>
+    <p id="texto">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod dolores corrupti repudiandae delectus
+        mollitia magnam aliquam corporis, facilis, cupiditate, sunt laudantium. Quas quam deserunt quod. Molestias quia
+        magni aut vitae!</p>
+    <p id="texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae atque laborum quam corporis ex
+        consequatur at vero tempore libero corrupti, dolor similique accusamus, eius voluptatem? Placeat veniam ipsam
+        expedita dicta!</p>
+
+        <button onclick="buscar()">Buscar</button>
+
+    <script>
+        function buscar() {
+            var texto = prompt("Dime que palabra buscar");
+            var contenido = document.getElementsByTagName("p");
+            for (var i = 0; i < contenido.length; i++) {
+                if (contenido[i].textContent.indexOf(texto) !== -1) {
+                    var span = document.createElement("span");
+                    span.textContent = texto.length;
+                    contenido[i].innerHTML = contenido[i].innerHTML.replace(texto, "<b>NO</b>");
+                    contenido[i].appendChild(span);
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body onload="contador()">
+<!--Crea una progress bar que se rellene cada décima de segundo un
+punto, del 0 al 100. Al terminar la cuenta se parará el contador. -->
+
+<label for="file">Descarga:</label>
+<progress id="file" value="0" max="100"> 0% </progress>
+
+<script>
+    function contador(){
+        var progress = document.getElementById("file");
+        setInterval(function(){
+            progress.value++;
+        }, 100);
+    }
+</script>
+
+</body>
+</html>

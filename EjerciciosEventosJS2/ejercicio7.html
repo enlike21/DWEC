@@ -1,47 +1,62 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+  <script src='main.js'></script>
 </head>
-<body onload="crearclases()">
-<!--     En una lista de 7 elementos, haz que al pinchar sobre cada
+
+<body>
+  <!--     En una lista de 7 elementos, haz que al pinchar sobre cada
     elemento cambien 4 propiedades de los estilos: color de fondo,
     espaciado entre las letras, tachado y que delante del elemento
     aparezca una x. Hazlo definiendo una 1 clase y cambiando los
     estilos en la clase. -->
-    
-    <ul id="miLista">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-    </ul>
-
-    <script>
-
-// Obtén la lista de elementos <li>
+  <ul id="miLista">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+  </ul>
+  <script>
+    // Lista de elementos <li>
     var lista = document.getElementById("miLista").getElementsByTagName("li");
+    // Agrego la clase "nuevaClase" a cada elemento <li>
+    for (var i = 0; i < lista.length; i++) {
+      lista[i].classList.add("nuevaClase");
+    }
 
-// Agrega el controlador de eventos a cada elemento <li>
-for (var i = 0; i < lista.length; i++) {
-  lista[i].addEventListener("click", cambiarEstilos());
-}
+    // Función de colores aleatorios
+    function coloresaleatorios() {
+      let arraydecolores = ["red", "blue", "green", "yellow", "grey"];
+      arraydecolores.sort(function () {
+        return Math.random() - 0.5;
+      });
+      var color = arraydecolores.shift();
+      return color;
+    }
 
-// Función para cambiar los estilos del elemento <li> seleccionado
-function cambiarEstilos() {
-  var liPulsado = event.target;
-  liPulsado.style.color = "red";
-  liPulsado.style.fontWeight = "bold";
-}
-    </script>
-
+    var contenedor = document.getElementById("miLista");
+    contenedor.addEventListener("click", function (event) {
+      if (event.target.tagName === "LI") {
+        var color = coloresaleatorios();
+        var elementos = document.getElementsByClassName("nuevaClase");
+        for (var i = 0; i < elementos.length; i++) {
+          elementos[i].style.backgroundColor = color;
+          elementos[i].style.letterSpacing = Math.floor(Math.random() * 20) + "px";
+          elementos[i].style.textDecoration = "underline";
+          elementos[i].innerHTML = "x " + elementos[i].innerHTML;
+        }
+      }
+    });
+  </script>
 </body>
+
 </html>

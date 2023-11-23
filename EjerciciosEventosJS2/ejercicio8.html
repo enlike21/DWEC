@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Titulo</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+  <form id="formulario">
+    <input type="text" id="numeros" placeholder="Ingrese un número de 12 dígitos">
+    <button type="button" onclick="validarNumero()">Validar</button>
+  </form>
+  <table id="tabla">
+    <tr>
+      <th>Números</th>
+    </tr>
+  </table>
+  <script>
+    function validarNumero() {
+      var numero = document.getElementById("numeros").value;
+      if (numero.length === 12 && !isNaN(numero)) {
+        digitoVerificador(numero);
+      } else {
+        window.alert("Ingrese un número de 12 dígitos numéricos");
+      }
+    }
+
+    function digitoVerificador(numero) {
+      var suma = 0;
+      for (var i = 0; i < numero.length; i++) {
+        suma += parseInt(numero.charAt(i));
+      }
+      var resto = suma % 10;
+      var digitoVerificador=suma-resto;
+      if(digitoVerificador==0){
+        digitoVerificador=0;
+      }
+
+      // Muestro los números en una tabla
+      var tabla = document.getElementById("tabla");
+      tabla.style.border="1px solid black";
+      for (var i = 0; i < numero.length; i++) {
+        var celda = document.createElement("td");
+        celda.textContent = numero.charAt(i);
+        celda.style.border="1px solid black";
+        tabla.rows[0].appendChild(celda);
+      }
+
+      // Muestro el dígito verificador en la última celda
+      var celdaDigitoVerificador = document.createElement("td");
+      celdaDigitoVerificador.textContent = digitoVerificador;
+      celdaDigitoVerificador.style.backgroundColor = "black";
+      celdaDigitoVerificador.style.color = "white";
+      tabla.rows[0].appendChild(celdaDigitoVerificador);
+    }
+  </script>
+</body>
+</html>
