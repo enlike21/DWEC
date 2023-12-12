@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--     Validación de formulario con 5 campos. Se validará todo desde
+JavaScript. La validación se realizará desde JavaScript mediante el evento
+“change” asociado a cada campo.
+Los campos a introducir serán:
+- nombre completo (obligatorio, 3 palabras y el inicio de cada palabra
+en mayúsculas)
+- email (obligatorio, de tipo email)
+https://elcssar.com/html5/input-type-email-regex-pattern
+- año (obligatorio, un año, que será siempre como máximo el año
+actual )
+- sexo (obligatorio, H o M (solo se podrá seleccionar uno))
+- ISBN (978-1-86197-876-9 | 978 1 86197 876 9)
+En el evento change de cada campo se mostrarán los valores correctos en
+un tabla de 2 columnas que ya exista en el HTML (la tabla siempre está
+en pantalla, hacerla en HTML y desde JavaScript solo es necesario ir
+cambiando el contenido de la segunda columna). La primera columna
+guarda el nombre del campo y en la segunda el valor o el mensaje de
+error.
+Si algo es incorrecto, se debe escribir en esa tabla en color rojo desde
+JavaScript un mensaje de error. El mensaje de error se sustituirá por el
+valor correcto en color negro cuando cada campo vaya pasando la
+validación. -->
+
+<form>
+    <fieldset>
+        <label>Nombre completo:</label>
+        <p><input type="text" placeholder="nombre completo" onchange="nombrecorrecto()" id="nombre"></p>
+        <label>email:</label>
+        <p><input type="text" placeholder="email" id="email" onchange="emailcorrecto()"></p>
+        <label>fecha:</label>
+        <p><input type="date" id="fecha" onchange="fechacorrecto()"></p>
+        <label>sexo:</label>
+        <p><input type="text" placeholder="sexo" id="sexo" onchange="sexocorrecto()"></p>
+        <label>ISBN:</label>
+        <p><input type="text" placeholder="isbn" id="isbn" onchange="isbncorrecto()"></p>
+    </fieldset>
+</form>
+<table border="1">
+    <tr>
+        <td>Nombre</td>
+        <td id="tdnombre"></td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td id="tdemail"></td>
+    </tr>
+    <tr>
+        <td>Año</td>
+        <td id="tdaño"></td>
+    </tr>
+    <tr>
+        <td>Sexo</td>
+        <td id="tdsexo"></td>
+    </tr>
+    <tr>
+        <td>ISBN</td>
+        <td id="tdisbn"></td>
+    </tr>
+</table>
+<script>
+
+    function nombrecorrecto() {
+            var inputnombre = document.getElementById("nombre").value;
+            var contiene3palabras = inputnombre.split(" ");
+            var patronmayus = /^[A-Z]/;
+            var tdnombre = document.getElementById("tdnombre");
+            if (contiene3palabras.length == 3 && patronmayus.test(contiene3palabras[0]) && patronmayus.test(contiene3palabras[1]) && patronmayus.test(contiene3palabras[2])) {
+                tdnombre.innerHTML = inputnombre;
+            } else {
+                tdnombre.innerHTML = "Nombre incorrecto";
+                tdnombre.style.color = "red";
+            }
+        }
+    
+    function emailcorrecto(){
+        var inputemail=document.getElementById("email").value;
+        var patronemail=/@*.com$/;
+        var tdemail=document.getElementById("tdemail");
+        if(patronemail.test(inputemail)){
+            tdemail.innerHTML=inputemail;
+        }
+        else{
+            tdemail.innerHTML="email incorrecto";
+            tdemail.style.color="red";
+        }
+    }
+    
+    function fechacorrecto(){
+        var inputfecha = document.getElementById("fecha").value;
+        var año = inputfecha.getFullYear();
+        var tdaño=document.getElementById("tdaño");
+        if (año <= 2023) {
+            tdaño.innerHTML=inputfecha;
+        } else {
+            tdaño.innerHTML="fecha incorrecta";
+            tdaño.style.color="red";
+        }
+     }
+    
+    function sexocorrecto(){
+        var inputsexo=document.getElementById("sexo").value;
+        var patronsexo=/H|M/;
+        var tdsexo=document.getElementById("tdsexo");
+        if(patronsexo.test(inputsexo)){
+            tdsexo.innerHTML=inputsexo;
+        }
+        else{
+            tdsexo.innerHTML="sexo incorrecto";
+            tdsexo.style.color="red";
+        }
+    }
+/*     - ISBN (978-1-86197-876-9 | 978 1 86197 876 9) */
+function isbncorrecto(){
+        var inputisbn=document.getElementById("isbn").value;
+        var patronisbn_guiones=/[0-9]{3}\-[0-9]\-[0-9]{5}\-[0-9]{3}\-[0-9]/;
+        var patronisbn_espacios=/[0-9]{3}\ [0-9]\ [0-9]{5}\ [0-9]{3}\ [0-9]/;
+        var tdisbn=document.getElementById("tdisbn");
+        if(patronisbn_espacios.test(inputisbn)||patronisbn_guiones.test(inputisbn)){
+            tdisbn.innerHTML=inputisbn;
+        }
+        else{
+            tdisbn.innerHTML="isbn incorrecto";
+            tdisbn.style.color="red";
+        }
+    }
+
+
+
+</script>
+</body>
+</html>

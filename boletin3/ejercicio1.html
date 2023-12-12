@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body onload="cuandocargue()">
+<!--     En un página HTML que tenga un ul. A los 5 segundos de terminar de
+cargarse la página se añadirá un número aleatorio (1-20) de elementos a
+la lista no ordenada. Cada elemento “li” se creará mediante
+createElement y se añadirá mediante insertAdjacentElement. -->
+
+<!-- En cada elemento se verá el número de orden en que se creó y en cada
+uno de ellos se guardará como atributo “data-palabra” una palabra que se
+irá pidiendo por teclado mediante un prompt a medida que se van
+creando los “li”.
+Es decir cada li deberá ser del estilo:
+<ul>
+…
+<li data-palabra=”palabra_introducida_por_usuario”>número</li>
+…
+</ul>
+Al pulsar sobre cada elemento, la palabra guardada en la etiqueta se verá
+en la pantalla y el número que se veía hasta ahora se guardará en
+data-palabra, es decir, cada vez que se pulse sobre una etiqueta se
+intercambiarán los valores. -->
+
+<ul id="lista">
+</ul>
+
+<script>
+    var lista=document.getElementById("lista");
+    var numeroaleatorio=Math.floor(Math.random() * 20) + 1;
+    function cuandocargue(){
+        setTimeout(function(){
+            for(var i=0;i<numeroaleatorio;i++){
+                var li=document.createElement("li");
+                li.innerHTML=i;
+                var atributo=prompt("Dime la palabra que quieres que forme parte del atributo");
+                li.setAttribute("data-palabra",atributo);
+                li.setAttribute("onclick","cambio(this)");
+                lista.insertAdjacentElement("beforeend", li);
+            }
+        },5000)
+    }
+
+    function cambio(elemento){
+
+        var liattribute=elemento.getAttribute("data-palabra");
+        var livalor=elemento.innerHTML;
+        elemento.setAttribute("data-palabra",livalor);
+        elemento.innerHTML=liattribute;
+    }
+    
+
+</script>
+
+</body>
+</html>
