@@ -79,10 +79,10 @@ validación. -->
                 tdnombre.style.color = "red";
             }
         }
-    
+
     function emailcorrecto(){
         var inputemail=document.getElementById("email").value;
-        var patronemail=/@*.com$/;
+        var patronemail=/@*\.com$/;
         var tdemail=document.getElementById("tdemail");
         if(patronemail.test(inputemail)){
             tdemail.innerHTML=inputemail;
@@ -94,7 +94,7 @@ validación. -->
     }
     
     function fechacorrecto(){
-        var inputfecha = document.getElementById("fecha").value;
+        var inputfecha = new Date (document.getElementById("fecha").value);
         var año = inputfecha.getFullYear();
         var tdaño=document.getElementById("tdaño");
         if (año <= 2023) {

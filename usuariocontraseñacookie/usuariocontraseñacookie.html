@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body onload="generarcontraseña()">
+    <h1 id="h1"></h1>
+    <form action="enviar.html">
+        <input placeholder="Nombre de usuario" type="text" id="nombre">
+        <input placeholder="contraseña" type="text" id="contraseña">
+        <input type="submit" value="Enviar" id="Enviar" onclick="guardarcookies()">
+    </form>
+</body>
+
+</html>
+
+<!-- Crea una página html en la que puedas introducir un nombre y una
+contraseña. Esa contraseña deberás compararla con una cookie que se
+almacenará en el navegador al cargarse la página. Si la contraseña
+introducida coincide con la almacenada en la cookie, deberás generar un
+identificador para la sesión (un número aleatorio por ejemplo) y
+almacenarlo en otra cookie. También deberás preguntar al usuario si
+desea el modo claro o el modo oscuro (preferencias). Cuando hagas todo
+eso deberás servir otra página con un encabezado en el que muestres: el
+nombre del usuario (inventado), el identificador de la sesión y la
+preferencia seleccionada en la pantalla anterior (claro-oscuro). -->
+
+<script>
+
+    function generarcontraseña() {
+        let password = "prueba";
+        document.cookie = "contraseña=" + password + ";path=/;";
+    }
+
+    function guardarcookies() {
+        let nombreusuario = document.getElementById("nombre").value;
+        let contraseña = document.getElementById("contraseña").value;
+
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+
+        var cookieparacomparar = getCookie("contraseña");
+
+        if (contraseña == cookieparacomparar) {
+            nombre = "Juan";
+            document.cookie = "nombre=" + nombre + ";path=/;";
+            let identificador = Math.floor(Math.random() * 100);
+            document.cookie = "identificador=" + identificador + ";path=/;";
+            let claro_oscuro = prompt("Que estilo deseas para tu pagina, Claro o Oscuro");
+            let comprobacion = false;
+            while (comprobacion != true) {
+                if (claro_oscuro == "Claro" || claro_oscuro == "Oscuro") {
+                    comprobacion = true;
+                    document.cookie = "preferencias=" + claro_oscuro + ";path=/;";
+                }
+                else {
+                    alert("Elige entre Claro o Oscuro");
+                    claro_oscuro = prompt("Que estilo deseas para tu pagina, Claro o Oscuro");
+                }
+            }
+        }
+
+
+    }
+
+</script>
