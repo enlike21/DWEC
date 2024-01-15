@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <!--Cuando hagas todo
+eso deberás servir otra página con un encabezado en el que muestres: el
+nombre del usuario (inventado), el identificador de la sesión y la
+preferencia seleccionada en la pantalla anterior (claro-oscuro). -->
+    <h1 id="h1"></h1>
+    <h2 id="h2"></h2>
+</body>
+
+</html>
+<script>
+    let nombre = localStorage.getItem('nombre');
+    let id = localStorage.getItem("identificador");
+    let preferencia=localStorage.getItem('preferencias');
+    let h1 = document.getElementById("h1");
+    let h2 = document.getElementById("h2");
+    h1.innerHTML = "Hola " + nombre;
+    h2.innerHTML = "Tu identificador es " + id;
+
+    if(preferencia=="Oscuro"){
+        document.body.style.background = "black";
+        h1.style.color="white";
+        h2.style.color="white";
+    }
+
+
+</script>
