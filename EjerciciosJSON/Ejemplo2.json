@@ -1,0 +1,12 @@
+{
+    "Autor": {
+      "Nombre_Apellido": "Pedro Salinas",
+      "obras":[
+        {
+            "Nombre": "Presagio",
+            "Lugar": "Madrid",
+            "Editorial": ["Indice"],
+            "Fecha": "1923"
+        }]
+  }
+}

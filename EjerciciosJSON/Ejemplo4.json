@@ -1,0 +1,105 @@
+{
+  "Clasificacion": {
+    "Temporada": "2019-2020",
+    "Grupos": [
+      {
+        "Nombre": "Grupo A",
+        "Equipos": [
+          {
+            "Nombre": "PSG",
+            "PJ": 6,
+            "V": 5,
+            "E": 1,
+            "D": 0,
+            "GF": 17,
+            "GC": 2,
+            "DG": 15,
+            "Pts": 16
+          },
+          {
+            "Nombre": "Real Madrid",
+            "PJ": 6,
+            "V": 3,
+            "E": 2,
+            "D": 1,
+            "GF": 14,
+            "GC": 8,
+            "DG": 6,
+            "Pts": 11
+          },
+          {
+            "Nombre": "Club Brujas",
+            "PJ": 6,
+            "V": 0,
+            "E": 3,
+            "D": 3,
+            "GF": 4,
+            "GC": 12,
+            "DG": -8,
+            "Pts": 3
+          },
+          {
+            "Nombre": "Galatasaray",
+            "PJ": 6,
+            "V": 0,
+            "E": 2,
+            "D": 4,
+            "GF": 1,
+            "GC": 14,
+            "DG": -13,
+            "Pts": 2
+          }
+        ]
+      },
+      {
+        "Nombre": "Grupo B",
+        "Equipos": [
+          {
+            "Nombre": "Liverpool",
+            "PJ": 6,
+            "V": 5,
+            "E": 1,
+            "D": 0,
+            "GF": 17,
+            "GC": 2,
+            "DG": 15,
+            "Pts": 16
+          },
+          {
+            "Nombre": "Atletico de Madrid",
+            "PJ": 6,
+            "V": 3,
+            "E": 2,
+            "D": 1,
+            "GF": 14,
+            "GC": 8,
+            "DG": 6,
+            "Pts": 11
+          },
+          {
+            "Nombre": "Oporto",
+            "PJ": 6,
+            "V": 0,
+            "E": 3,
+            "D": 3,
+            "GF": 4,
+            "GC": 12,
+            "DG": -8,
+            "Pts": 3
+          },
+          {
+            "Nombre": "RB Leipzig",
+            "PJ": 6,
+            "V": 0,
+            "E": 2,
+            "D": 4,
+            "GF": 1,
+            "GC": 14,
+            "DG": -13,
+            "Pts": 2
+          }
+        ]
+      }
+    ]
+  }
+}
