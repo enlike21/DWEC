@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Título de la Página</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        button {
+            width: 150px;
+            height: 100px;
+            background-color: bisque;
+        }
+
+        body {
+            background-color: antiquewhite;
+        }
+
+        form {
+            width: 300px;
+            padding: 1rem;
+            height: 150px;
+            background-color: white;
+        }
+
+        input {
+            width: 200px;
+            font-size: x-large;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input type="text" placeholder="Escribe un número" id="texto">
+        <button type="button" id="enviar" disabled>Enviar</button>
+    </form>
+    <output id="resultado"></output>
+
+    <script>
+        let miinput = document.getElementById("texto");
+        let boton = document.getElementById("enviar");
+        let resultadoOutput = document.getElementById("resultado");
+
+        miinput.addEventListener('input', function () {
+            let valorInput = parseInt(this.value);
+            if (isNaN(valorInput) || valorInput < 0) {
+                window.alert("Error, debes introducir un número entero positivo");
+                boton.disabled = true;
+            } else {
+                boton.disabled = false;
+            }
+        });
+
+        boton.addEventListener('click', function () {
+            let valorInput = parseInt(miinput.value);
+            let factorial = calcularFactorial(valorInput);
+            resultadoOutput.textContent = `El factorial de ${valorInput} es: ${factorial}`;
+        });
+
+        function calcularFactorial(numero) {
+            if (numero === 0 || numero === 1) {
+                return 1;
+            } else {
+                return numero * calcularFactorial(numero - 1);
+            }
+        }
+    </script>
+</body>
+
+</html>

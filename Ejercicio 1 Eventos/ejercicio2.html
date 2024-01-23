@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<style>
+    div{
+        width: 300px;
+        height: 300px;
+        background-color: antiquewhite;
+    }
+</style>
+</head>
+<body>
+<!--     2.- Sumar y restar. Habrá 2 input type number. Un div contenedor y
+dentro 2 div´s: suma y resta. En cada click, se llegará al click del
+contenedor y si se ha pulsado en suma, se suma y si se ha pulsado en
+resta, se resta. -->
+
+<div id="divcontenedor">
+
+<div id="sumar">
+    <input type="number" id="num_sumar">
+</div>
+
+<div id="restar">
+    <input type="number" id="num_restar">
+</div>
+
+</div>
+
+</body>
+</html>
+
+<script> 
+    let divsumar=document.getElementById("sumar"); 
+    let divrestar=document.getElementById("restar"); 
+    let resultado=document.createElement("p"); 
+    divsumar.addEventListener("dblclick", function(){ 
+        let numsumar=parseInt(document.getElementById("num_sumar").value); 
+        let numrestar=parseInt(document.getElementById("num_restar").value); 
+        if (isNaN(numsumar) || isNaN(numrestar)) { 
+            resultado.innerHTML = "Por favor, introduzca números válidos."; 
+        } else { 
+            resultado.innerHTML=numsumar+numrestar; 
+            document.body.appendChild(resultado);
+        } 
+    }) 
+    divrestar.addEventListener("dblclick", function(){ 
+        let numsumar=parseInt(document.getElementById("num_sumar").value); 
+        let numrestar=parseInt(document.getElementById("num_restar").value); 
+        if (isNaN(numsumar) || isNaN(numrestar)) { 
+            resultado.innerHTML = "Por favor, introduzca números válidos."; 
+        } else { 
+            resultado.innerHTML=numsumar-numrestar; 
+            document.body.appendChild(resultado);
+        } 
+    }) 
+</script>
