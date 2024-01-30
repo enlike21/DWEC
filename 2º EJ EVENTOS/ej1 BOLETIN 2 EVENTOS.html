@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <!-- 1.- En una web debe haber un formulario con un input type text. Al pulsar
+un botón, se deberá validar lo que hay en el input type text, el cual solo
+podrá contener números. -->
+
+    <!-- Si es válido, se mostrará en una etiqueta junto al input type text el
+resultado de sumar todos los números que contiene el input. -->
+
+    <!-- Para hacer el ejercicio, crea un método que realice lo que se pide y que
+devuelva la suma o -1 si no se ha validado el input (es decir, que contiene
+algo que no sea un número). -->
+
+
+    <form>
+        <input type="text" placeholder="mete solo numeros crack" id="inputid">
+        <button type="button" id="boton">Comprobar</button>
+    </form>
+
+    <script>
+        var boton = document.getElementById("boton");
+
+        boton.addEventListener("click", () => {
+            var input = document.getElementById("inputid").value;
+            var numero = parseInt(input);
+
+            if (isNaN(numero)) {
+                window.alert("Introduce un número por favor");
+            } else {
+
+                var array = Array.from(input);
+                var suma = 0;
+
+                array.forEach(numero => {
+                    suma += parseInt(numero);
+                });
+
+                var p = document.createElement("p");
+                p.innerHTML = "La suma de los dígitos es: " + suma;
+                p.style.color = "green";
+                p.style.fontSize = "large";
+                document.body.appendChild(p);
+                setTimeout(function () {
+                    p.remove();
+                }, 3000);
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

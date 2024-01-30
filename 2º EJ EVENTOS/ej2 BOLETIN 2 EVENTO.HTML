@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body>
+    <!--     2.- En un formulario habrá un input text.
+Al escribir sobre el input text y pulsar la tecla INTRO, iremos añadiendo
+elementos a un array y lo que hay en el input se borrará.
+Cada vez que añadamos un elemento al array, se mostrará por pantalla el
+contenido del mismo en una lista no ordenada, de manera que el último
+elemento añadido aparezca el primero. -->
+
+    <form>
+        <input type="number" placeholder="mete solo numeros crack" id="inputid">
+    </form>
+    <ul id="lista">
+        
+    </ul>
+    
+    <script>
+        var input = document.getElementById("inputid");
+        var array = [];
+        var ol = document.getElementById("lista");
+    
+        input.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && input.value!="") {
+                event.preventDefault(); /* Para que no se reinicie */
+                array.unshift(input.value); /* Me introduce los valores al principio del array */
+                var li = document.createElement("li");
+                li.textContent = array[0];
+                ol.insertBefore(li, ol.firstChild);
+                input.value = "";
+            } else if (event.key === "Escape") {
+                input.value = "";
+            }
+        });
+    </script>
+    
+
+
+</body>
+
+</html>
