@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+  <script src='main.js'></script>
 </head>
+
 <body>
-    <!-- 3.- Se va a pedir por formulario: email, contraseña y repite contraseña.
+  <!-- 3.- Se va a pedir por formulario: email, contraseña y repite contraseña.
 No se podrá copiar y pegar en los campos de contraseña. Existirá un
 botón ‘validar’ que comprobará que el email sea correcto y que las
 contraseñas sean correctas e iguales. Las contraseñas serán correctas
@@ -17,24 +19,56 @@ siempre que incluyan minúsculas, mayúsculas, números y algún carácter
 especial, no pudiendo tener una longitud inferior a 6 caracteres.
  -->
 
- <form>
+  <form>
     <label for="email">Email:</label>
-    <input type="email" name="email" id="email">
+    <input type="text" name="email" id="email">
     <br>
     <label for="contraseña">Contraseña:</label>
-    <input type="text" name="contraseña" id="contraseña">
+    <input type="text" name="contraseña" id="contraseña" oninput="Posibilidad_de_copiar()">
     <br>
     <label for="repite_contraseña">Repite contraseña:</label>
     <input type="text" name="repite_contraseña" id="repite_contraseña">
     <br>
-    <button type="button">Validar</button>
+    <button type="button" id="boton">Validar</button>
   </form>
 
   <script>
 
-    
+    let patroncontraseña = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    let boton = document.getElementById("boton");
+    let contraseña = document.getElementById("contraseña");
+    let contraseña_repe = document.getElementById("repite_contraseña");
+
+    boton.addEventListener("click", () => {
+
+      let email = document.getElementById("email").value;
+      contraseña = contraseña.value;
+      contraseña_repe = contraseña_repe.value;
+
+      if (contraseña === contraseña_repe && patroncontraseña.test(contraseña) && contraseña.length >= 7) {
+        window.alert("Sesion iniciada");
+      }
+      else {
+        window.alert("error");
+      }
+    })
+
+    contraseña.addEventListener('keydown', (event) => {
+      // Bloquear Ctrl+V (Windows/Linux) o Cmd+V (Mac)
+      if ((event.ctrlKey || event.metaKey) && event.key === 'v') {
+        event.preventDefault();
+      }
+    });
+
+    contraseña_repe.addEventListener('keydown', (event) => {
+      // Bloquear Ctrl+V (Windows/Linux) o Cmd+V (Mac)
+      if ((event.ctrlKey || event.metaKey) && event.key === 'v') {
+        event.preventDefault();
+      }
+    });
 
   </script>
 
 </body>
+
 </html>

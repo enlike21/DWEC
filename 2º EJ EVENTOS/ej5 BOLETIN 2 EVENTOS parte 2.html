@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <style>
+        body {
+            background-color: antiquewhite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+    // Recuperar el objeto persona desde localStorage
+    var datosGuardados = localStorage.getItem('JSON_persona');
+
+    // Convertir la cadena JSON de nuevo a un objeto
+    var personaRecuperada = JSON.parse(datosGuardados);
+
+    window.alert(personaRecuperada);
+
+    </script>
+
+</body>
+
+</html>
