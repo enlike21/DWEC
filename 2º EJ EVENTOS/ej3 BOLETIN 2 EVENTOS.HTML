@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  
+
   <!-- 3.- Se va a pedir por formulario: email, contraseña y repite contraseña.
 No se podrá copiar y pegar en los campos de contraseña. Existirá un
 botón ‘validar’ que comprobará que el email sea correcto y que las
@@ -25,7 +25,7 @@ especial, no pudiendo tener una longitud inferior a 6 caracteres.
     <input type="text" name="email" id="email">
     <br>
     <label for="contraseña">Contraseña:</label>
-    <input type="text" name="contraseña" id="contraseña" oninput="Posibilidad_de_copiar()">
+    <input type="text" name="contraseña" id="contraseña">
     <br>
     <label for="repite_contraseña">Repite contraseña:</label>
     <input type="text" name="repite_contraseña" id="repite_contraseña">
@@ -61,6 +61,10 @@ especial, no pudiendo tener una longitud inferior a 6 caracteres.
       }
     });
 
+    contraseña.addEventListener("copy", (event) => {
+      event.preventDefault();
+    })
+    
     contraseña.addEventListener("paste", (event) => {
       event.preventDefault();
     })

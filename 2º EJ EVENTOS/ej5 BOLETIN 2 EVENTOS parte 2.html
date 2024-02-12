@@ -19,19 +19,22 @@
     </style>
 </head>
 
-<body>
+<body onload="cuandocargue()">
 
+
+</body>
+
+</html>
     <script>
     // Recuperar el objeto persona desde localStorage
     var datosGuardados = localStorage.getItem('JSON_persona');
 
     // Convertir la cadena JSON de nuevo a un objeto
-    var personaRecuperada = JSON.parse(datosGuardados);
-
-    window.alert(personaRecuperada);
+    
+    function cuandocargue(){
+            var personaRecuperada = JSON.parse(datosGuardados);
+            window.alert(personaRecuperada.saludo);
+            personaRecuperada.saludo;
+        }
 
     </script>
-
-</body>
-
-</html>
