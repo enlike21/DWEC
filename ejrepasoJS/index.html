@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+    <title>Ejercicio 6</title>
+  </head>
+
+  <body>
+    <main>
+      <section class="enunciado">
+        <p>
+          Partiendo de la lista de alumnos de abajo crea una tabla con dos
+          columnas usando únicamente métodos de manipulación del DOM.
+        </p>
+        <p>La tabla se creará al pulsar un botón de crear tabla.</p>
+        <p>Parte de esta lista de alumnos:</p>
+        <code>
+          &lt;ul class="listaAlumnos"&gt; <br />
+          &lt;li&gt;Tomás Tuerzo&lt;/li&gt;<br />
+          &lt;li&gt;Aitor Tilla&lt;/li&gt;<br />
+          &lt;li&gt;Sara Mago&lt;/li&gt;<br />
+          &lt;li&gt;Pancho Colate&lt;/li&gt;<br />
+          &lt;li&gt;Ana Tema&lt;/li&gt;<br />
+          &lt;/ul&gt;<br />
+        </code>
+        <p>
+          Añade un formulario con dos cuadros de texto (nombre y apellido) y un
+          botón que permita añadir un elemento a la lista y a la tabla
+          simultáneamente como último elemento
+        </p>
+        <p>
+          Añade un checkbox para indicar si se quiere añadir el nuevo alumno al
+          final de la lista/tabla.
+        </p>
+        <p>
+          Añade un manejador de evento delegado en la lista que permita que al
+          hacer click sobre un elemento se coloque el primero.
+        </p>
+        <p>
+          Añade un manejador de evento delegado en la lista que permita que al
+          hacer click sobre una fila de la tabla que contenga datos (no la
+          cabecera) cree un clon y lo añada al final de la misma.
+        </p>
+      </section>
+      <section class="ejecucion">
+        <article id="listaAlumnos">
+          <ul class="listaAlumnos">
+            <li>Tomás Tuerzo</li>
+            <li>Aitor Tilla</li>
+            <li>Sara Mago</li>
+            <li>Pancho Colate</li>
+            <li>Ana Tema</li>
+            <li>Armando Bronca</li>
+            <li>Aitor Menta</li>
+          </ul>
+          <form
+            action="tu_archivo_php.php"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <fieldset>
+              <legend>Incorporacion</legend>
+              <label for="nombre"
+                >Nombre: <input type="text" name="nombre"
+              /></label>
+              <label for="apellido"
+                >Apellido: <input type="text" name="apellido"
+              /></label>
+            </fieldset>
+            <button type="button" id="incorporacion">Incorporacion</button>
+            <br>
+            <span>Añadir al final</span>
+            <input type="checkbox" id="checkbox_final">
+          </form>
+        </article>
+        <button type="button" id="btnTabla">Generar tabla</button>
+        <article class="tablita"></article>
+      </section>
+    </main>
+  </body>
+  <script src="ejTabla.js"></script>
+  
+</html>
