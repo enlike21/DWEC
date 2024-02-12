@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -8,7 +9,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
     <style>
-        body{
+        body {
             background-color: antiquewhite;
             display: flex;
             flex-direction: column;
@@ -16,7 +17,8 @@
             justify-content: center;
             height: 100vh;
         }
-        div{
+
+        div {
             background-color: darksalmon;
             border-radius: 2rem;
             display: flex;
@@ -26,28 +28,31 @@
             justify-content: center;
             padding: 3rem;
         }
-        button{
+
+        button {
             margin: 2rem;
             padding: 1rem;
         }
     </style>
 </head>
+
 <body>
 
     <!--4.- Crea una página web con un botón que capture los eventos click,
     mouseover y mouseout. Añade otro botón en el que al hacer clic se vayan
     eliminando los eventos capturados del primer botón. -->
 
-        <div>
-            <button id="boton_eventos">MOUSEOVER Y MOUSEOUT</button>
-            <button id="boton_eliminar">ELIMINAR EVENTOS</button>
-        </div>
+    <div>
+        <button id="boton_eventos">MOUSEOVER Y MOUSEOUT</button>
+        <button id="boton_eliminar">ELIMINAR EVENTOS</button>
+    </div>
 
-        <script>
-            let boton_eventos=document.getElementById("boton_eventos");
-            let boton_eliminar=document.getElementById("boton_eliminar");
+    <script>
+        let boton_eventos = document.getElementById("boton_eventos");
+        let boton_eliminar = document.getElementById("boton_eliminar");
+        let array=[];
 
-                function MouseOver() {
+        function MouseOver() {
             window.alert("Has pasado el ratón");
         }
 
@@ -66,7 +71,8 @@
             window.alert("Eventos eliminados :D");
         });
 
-        </script>
+    </script>
 
 </body>
+
 </html>
