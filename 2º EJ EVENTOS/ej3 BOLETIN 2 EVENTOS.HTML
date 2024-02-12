@@ -11,6 +11,7 @@
 </head>
 
 <body>
+  
   <!-- 3.- Se va a pedir por formulario: email, contraseña y repite contraseña.
 No se podrá copiar y pegar en los campos de contraseña. Existirá un
 botón ‘validar’ que comprobará que el email sea correcto y que las
@@ -60,12 +61,21 @@ especial, no pudiendo tener una longitud inferior a 6 caracteres.
       }
     });
 
+    contraseña.addEventListener("paste", (event) => {
+      event.preventDefault();
+    })
+    
     contraseña_repe.addEventListener('keydown', (event) => {
       // Bloquear Ctrl+V (Windows/Linux) o Cmd+V (Mac)
       if ((event.ctrlKey || event.metaKey) && event.key === 'v') {
         event.preventDefault();
+        
       }
     });
+
+    contraseña_repe.addEventListener("paste", (event) => {
+      event.preventDefault();
+    })
 
   </script>
 
