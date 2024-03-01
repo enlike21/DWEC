@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "nombre": "Almería",
+        "coste_alojamiento": 12,
+        "coste_alimentacion": 22,
+        "imagen": "imagen/almeria.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Granada",
+        "coste_alojamiento": 143.2,
+        "coste_alimentacion": 22,
+        "imagen": "imagen/granada.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "Málaga",
+        "coste_alojamiento": 98.5,
+        "coste_alimentacion": 25,
+        "imagen": "imagen/malaga.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "Sevilla",
+        "coste_alojamiento": 120.7,
+        "coste_alimentacion": 28,
+        "imagen": "imagen/sevilla.jpg"
+    },
+    {
+        "id": 5,
+        "nombre": "Córdoba",
+        "coste_alojamiento": 85.3,
+        "coste_alimentacion": 20,
+        "imagen": "imagen/Cordoba-1.jpg"
+    }
+]
