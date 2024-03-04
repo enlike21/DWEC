@@ -29,10 +29,7 @@ img {
 }
 
 table {
-    display: flex;
-    flex-direction: column;
-    grid-column: 1/5;
-    grid-row: 2;
+    border: 1px solid black;
 }
 
 .precio_alojamiento {

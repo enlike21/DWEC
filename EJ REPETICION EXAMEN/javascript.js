@@ -34,80 +34,124 @@ const provincias = [
         "coste_alimentacion": 20,
         "imagen": "imagen/Cordoba-1.jpg"
     }
-    // Puedes seguir añadiendo más provincias aquí
 ];
 
-//Para asegurarme que todo ha cargado ya
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
     empezar();
 });
 
-
 function empezar() {
     let divs = document.getElementsByTagName("div");
-    
+    let tabla = document.createElement("table");
+    document.body.appendChild(tabla);
+
     for (let i = 0; i < divs.length; i++) {
-        // Crea los elementos para cada provincia
         let h2 = document.createElement("h2");
         h2.textContent = provincias[i].nombre;
         h2.style.textAlign = "center";
         h2.style.fontSize = "xx-large";
-        h2.style.textShadow="3px 3px 3px grey";
-        
+        h2.style.textShadow = "3px 3px 3px grey";
+
         let img = document.createElement("img");
         img.setAttribute("src", provincias[i].imagen);
-        
+
         let precioAlojamiento = document.createElement("span");
         precioAlojamiento.textContent = "Precio de alojamiento: " + provincias[i].coste_alojamiento + " €";
-        precioAlojamiento.classList.add("precio_alojamiento"); // Agrega la clase "precio" al span
+        precioAlojamiento.classList.add("precio_alojamiento");
         let precioAlimentacion = document.createElement("span");
-        precioAlimentacion.textContent = "Precio de alimentacion: " + provincias[i].coste_alimentacion + " €";
-        precioAlimentacion.classList.add("precio_alimentacion"); // Agrega la clase "precio" al span
-        
-        //GUARDO EL BOTON DE CADA DIV PARA
-        let boton = divs[i].querySelector("button");
-        
-        //PONER LOS ELEMENTOS ANTES DEL BOTON EN CADA DIV
-        divs[i].insertBefore(h2, boton);
-        divs[i].insertBefore(img, boton);
-        
+        precioAlimentacion.textContent = "Precio de alimentación: " + provincias[i].coste_alimentacion + " €";
+        precioAlimentacion.classList.add("precio_alimentacion");
+
+        let boton = document.createElement("button");
+        boton.textContent = "Calcular Precio";
+        boton.addEventListener("click", () => {
+            let lugarExistente = document.querySelector("table tr[infolugar='" + provincias[i].nombre + "']");
+            if (lugarExistente) {
+                let precioActual = parseFloat(lugarExistente.querySelector("td:last-child").textContent);
+                let nuevoPrecio = precioActual + provincias[i].coste_alojamiento + provincias[i].coste_alimentacion;
+                lugarExistente.querySelector("td:last-child").textContent = nuevoPrecio.toFixed(2) + " €";
+
+                if (nuevoPrecio > (provincias[i].coste_alojamiento + provincias[i].coste_alimentacion)) {
+                    if (!lugarExistente.querySelector("button")) {
+                        let botonEliminar = document.createElement("button");
+                        botonEliminar.textContent = "-";
+                        botonEliminar.addEventListener("click", () => {
+                            eliminarDia(provincias[i].nombre, provincias[i].coste_alojamiento + provincias[i].coste_alimentacion);
+                        });
+                        lugarExistente.querySelector("td:last-child").appendChild(botonEliminar);
+                    }
+                }
+            } else {
+                añadirfila(provincias[i].nombre, provincias[i].coste_alojamiento + provincias[i].coste_alimentacion);
+            }
+            calcularResultadoFinal();
+        });
+
+        divs[i].appendChild(h2);
+        divs[i].appendChild(img);
         divs[i].appendChild(precioAlojamiento);
         divs[i].appendChild(precioAlimentacion);
-        
-        // Añade eventos de ratón a las imágenes
+        divs[i].appendChild(boton);
+
         img.addEventListener("mouseover", (e) => {
             img.style.transition = "all 1s";
             precioAlimentacion.style.transition = "all 1s";
             precioAlojamiento.style.transition = "all 1s";
             img.style.filter = "blur(0.5rem)";
-            precioAlojamiento.style.opacity = "100"; // Muestro el precio al pasar el ratón
-            precioAlimentacion.style.opacity = "100"; // Muestro el precio al pasar el ratón
+            precioAlojamiento.style.opacity = "100";
+            precioAlimentacion.style.opacity = "100";
         });
-        
+
         img.addEventListener("mouseout", (e) => {
-            img,precioAlimentacion,precioAlojamiento.style.transition = "all 1s";
+            img, precioAlimentacion, precioAlojamiento.style.transition = "all 1s";
             img.style.filter = "none";
-            precioAlimentacion.style.opacity = "0"; // Oculta el precio al retirar el ratón
-            precioAlojamiento.style.opacity = "0"; // Oculta el precio al retirar el ratón
+            precioAlimentacion.style.opacity = "0";
+            precioAlojamiento.style.opacity = "0";
         });
 
-        //AQUI TENGO QUE HACER UN FOR PARA RECORRER LOS BOTONES Y HACER LA FUNCION
-        //CALCULAR PRECIOS 🤓👆
-
+        divs[i].setAttribute("coste_alojamiento", provincias[i].coste_alojamiento);
+        divs[i].setAttribute("coste_alimentacion", provincias[i].coste_alimentacion);
     }
 
-
-
+    // Creo la fila para el total al final de la tabla
+    let filaTotal = document.createElement("tr");
+    let thTotalTitulo = document.createElement("th");
+    let tdTotal = document.createElement("td");
+    tdTotal.setAttribute("id", "total");
+    filaTotal.appendChild(thTotalTitulo);
+    filaTotal.appendChild(tdTotal);
+    tabla.appendChild(filaTotal);
 }
 
-function calcularprecios(){
-//Tabla para mostrar los datos
-let tabla = document.createElement("table");
-let tr_nombres = document.createElement("tr");
-let tr_precios = document.createElement("tr");
-let td_precio = document.createElement("td");
-let th_nombre = document.createElement("th");
+function añadirfila(nombre, precio) {
+    let table = document.querySelector("table");
+    let tr = document.createElement("tr");
+    tr.setAttribute("infolugar", nombre);
+    let tdNombre = document.createElement("td");
+    let tdPrecio = document.createElement("td");
 
+    tdNombre.textContent = nombre;
+    tdPrecio.textContent = precio.toFixed(2) + " €";
 
+    tr.appendChild(tdNombre);
+    tr.appendChild(tdPrecio);
+    table.appendChild(tr);
+}
 
+function calcularResultadoFinal() {
+    let precios = document.querySelectorAll("table td:last-child");
+    let total = 0;
+    for (let i = 1; i < precios.length; i++) {
+        total += parseFloat(precios[i].textContent);
+    }
+    let totalElement = document.getElementById("total");
+    totalElement.textContent = "Total: " + total.toFixed(2) + " €";
+}
+
+function eliminarDia(nombre, precio) {
+    let lugarExistente = document.querySelector("table tr[infolugar='" + nombre + "']");
+    let precioActual = parseFloat(lugarExistente.querySelector("td:last-child").textContent);
+    let nuevoPrecio = precioActual - precio;
+    lugarExistente.querySelector("td:last-child").textContent = nuevoPrecio.toFixed(2) + " €";
+    calcularResultadoFinal();
 }
