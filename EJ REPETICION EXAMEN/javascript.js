@@ -70,22 +70,21 @@ function empezar() {
                 let precioActual = parseFloat(lugarExistente.querySelector("td:last-child").textContent);
                 let nuevoPrecio = precioActual + provincias[i].coste_alojamiento + provincias[i].coste_alimentacion;
                 lugarExistente.querySelector("td:last-child").textContent = nuevoPrecio.toFixed(2) + " €";
-
-                if (nuevoPrecio > (provincias[i].coste_alojamiento + provincias[i].coste_alimentacion)) {
-                    if (!lugarExistente.querySelector("button")) {
-                        let botonEliminar = document.createElement("button");
-                        botonEliminar.textContent = "-";
-                        botonEliminar.addEventListener("click", () => {
-                            eliminarDia(provincias[i].nombre, provincias[i].coste_alojamiento + provincias[i].coste_alimentacion);
-                        });
-                        lugarExistente.querySelector("td:last-child").appendChild(botonEliminar);
-                    }
-                }
             } else {
                 añadirfila(provincias[i].nombre, provincias[i].coste_alojamiento + provincias[i].coste_alimentacion);
+                lugarExistente = document.querySelector("table tr[infolugar='" + provincias[i].nombre + "']");
+            }
+            if (!lugarExistente.querySelector("button")) {
+                let botonEliminar = document.createElement("button");
+                botonEliminar.textContent = "Eliminar";
+                botonEliminar.addEventListener("click", () => {
+                    eliminarDia(provincias[i].nombre, tabla);
+                });
+                lugarExistente.querySelector("td:last-child").appendChild(botonEliminar);
             }
             calcularResultadoFinal();
         });
+        
 
         divs[i].appendChild(h2);
         divs[i].appendChild(img);
@@ -148,10 +147,9 @@ function calcularResultadoFinal() {
     totalElement.textContent = "Total: " + total.toFixed(2) + " €";
 }
 
-function eliminarDia(nombre, precio) {
+function eliminarDia(nombre, tabla) {
     let lugarExistente = document.querySelector("table tr[infolugar='" + nombre + "']");
-    let precioActual = parseFloat(lugarExistente.querySelector("td:last-child").textContent);
-    let nuevoPrecio = precioActual - precio;
-    lugarExistente.querySelector("td:last-child").textContent = nuevoPrecio.toFixed(2) + " €";
-    calcularResultadoFinal();
+        tabla.removeChild(lugarExistente); // Eliminar el elemento de la tabla
+        calcularResultadoFinal(); // Recalcular el precio total
 }
+
