@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Soy un configurador de vehículos</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <script>
+    const extras = [
+      {
+          id: 1,
+          nombre: 'Luces antiniebla',
+          precio: 123,
+          imagen: 'img/antiniebla.jpg'
+      },
+      {
+          id: 2,
+          nombre: 'Llantas modelo Tornado',
+          precio: 542.56,
+          imagen: 'img/llantas1.jpg'
+      },
+      {
+          id: 3,
+          nombre: 'Paquete iluminación básico',
+          precio: 2146,
+          imagen: 'img/packilu.jpg'
+      },
+      {
+          id: 4,
+          nombre: 'Porta equipajes techo básico',
+          precio: 756.78,
+          imagen: 'img/porta.jpg'
+      },
+      {
+          id: 5,
+          nombre: 'Porta equipajes techo deluxe',
+          precio: 1756.78,
+          imagen: 'img/porta2.jpg'
+      },
+      {
+          id: 6,
+          nombre: 'Vaca',
+          precio: 175634.78,
+          imagen: 'img/vaca2.jpg'
+      }
+  ];
+  </script>
+  <script src="script_template.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <!-- Elementos cargados desde el JSON -->
+      <main id="items" class="col-sm-8 row"></main>
+
+      <!-- Carrito -->
+      <aside class="col-sm-4">
+        <h2>Multa final</h2>
+        <!-- Extras -->
+        <ul id="carrito" class="list-group"></ul>
+        <hr>
+        <!-- total -->
+        <p class="text-right">Total: <span id="total"></span>&euro;</p>
+        <button id="boton-vaciar" class="btn btn-danger">Empezar de cero</button>
+      </aside>
+    </div>
+  </div>
+
+</body>
+
+</html>
