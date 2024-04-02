@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Visualizador de bienes</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <script src="bbdd.js"></script>
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <h1 class="text-center w-100 mb-2 mt-4">Inmuebles de la Junta de Andalucía</h1>
+  <h5 class="text-center w-100 mb-4">También puedes filtrar por uso (FORESTAL, etc.) haciendo clic encima</h5>
+  <div class="container">
+    <div class="row">
+      <!-- Elementos cargados desde el JSON -->
+      <main id="items" class="col-sm-9 row"></main>
+
+      <!-- Filtros y totales -->
+      <aside id="totales" class="col-sm-3"></aside>
+    </div>
+  </div>
+
+</body>
+
+</html>
