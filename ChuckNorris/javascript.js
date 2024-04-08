@@ -5,17 +5,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let botonrandom = document.getElementById("random");
     let chiste = document.getElementById("chiste");
     let select = document.getElementById("categorias");
-
+    let botontexto = document.getElementById("enviartexto");
+    
     //Ejecuto las funciones
     botonrandom.addEventListener("click", chisterandom);
     recogercategorias(select);
     select.addEventListener("change",chisteCategoria);
+    botontexto.addEventListener("click", buscartexto);
+    
 })
 
 
 //FUNCION PARA CHISTE RANDOM
 function chisterandom() {
-
+    
     let random = new XMLHttpRequest();
     random.open("GET", "https://api.chucknorris.io/jokes/random");
     random.send();
@@ -38,13 +41,13 @@ function recogercategorias(select) {
             alert(`Error ${categorias.status}: ${categorias.statusText}`); // ej. 404: No encontrado
         } else {
             //ME GUARDO EN EL ARRAY TODAS LAS CATEGORIAS EXISTENTES
-            populateSelect(JSON.parse(categorias.responseText), select);
+            categoriasenSelect(JSON.parse(categorias.responseText), select);
         }
     };
 }
 
 // Función que rellena el select a partir de la respuesta
-function populateSelect(arrayC, select) {
+function categoriasenSelect(arrayC, select) {
     arrayC.forEach((categoria) => {
         let option = document.createElement("option");
         option.textContent = categoria;
@@ -63,6 +66,26 @@ function chisteCategoria(){
             alert(`Error ${chistecategorico.status}: ${chistecategorico.statusText}`);
         } else {
             chiste.textContent = JSON.parse(chistecategorico.responseText).value;
+        }
+    };
+}
+
+//FUNCION PARA BUSCAR LOS CHISTES POR TEXTO
+function buscartexto() {
+    let inputtexto = document.getElementById("palabra");
+    let chiste_texto = new XMLHttpRequest();
+    chiste_texto.open("GET", `https://api.chucknorris.io/jokes/search?query=${inputtexto.value}`);
+    chiste_texto.send();
+    chiste_texto.onload = function() {
+        if (chiste_texto.status != 200) {
+            alert(`Error ${chiste_texto.status}: ${chiste_texto.statusText}`);
+        } else {
+            let chistesEncontrados = JSON.parse(chiste_texto.responseText).result; //TE DEVUELVE EL RESULTADO DE TODOS LAS RESPUESTAS EXISTENTES
+            if (chistesEncontrados.length > 0) {
+                chiste.textContent = chistesEncontrados[0].value; //ESCOGEMOS LA PRIMERA OPCIÓN
+            } else {
+                chiste.textContent = "No se encontraron chistes relacionados con esa palabra.";
+            }
         }
     };
 }
