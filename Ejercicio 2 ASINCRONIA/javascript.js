@@ -38,13 +38,14 @@ function usuarios_en_Select(arrayC, select) {
 // FUNCION PARA RECUPERAR LOS POST DEL USUARIO Y SUS COMENTARIOS Y IMPRIMIRLOS POR PANTALLA
 function recuperarPost_Usuarios() {
     let usuario = this.options[this.selectedIndex].value;
+
     // CREO LA LISTA PARA PONER LOS POSTS
     let lista_post = document.createElement("ol");
     lista_post.classList.add("list-group", "list-group-flush");
     lista_post.innerHTML = "";
-    let lista_comentarios = document.createElement("ol"); // Lista para los comentarios
-    lista_comentarios.classList.add("list-group","list-group-flush");
-    lista_comentarios.innerHTML = "";
+    //FIN DE LISTAS
+
+    //RECOJO LOS POST
     let post_por_usuario = new XMLHttpRequest();
     post_por_usuario.open("GET", `https://jsonplaceholder.typicode.com/posts?userId=${usuario}`);
     post_por_usuario.send();
@@ -54,19 +55,15 @@ function recuperarPost_Usuarios() {
         } else {
             let h3_posts = document.createElement("h3");
             h3_posts.textContent = `Los posts del usuario con id=${usuario} son:`;
-            let h3_comentarios = document.createElement("h3"); // Encabezado para los comentarios
-            h3_comentarios.classList.add("card-title");
             h3_posts.classList.add("card-title");
-            h3_comentarios.textContent = `Comentarios asociados a los posts:`;
             let posts = JSON.parse(post_por_usuario.responseText);
             posts.forEach(post => {
                 let postLi = document.createElement("li");
                 postLi.classList.add("list-group-item");
                 postLi.textContent = post.title;
-                lista_post.appendChild(postLi);
-                
+
                 // Para cada post, obtengo sus comentarios
-                let comentarios_por_post = new XMLHttpRequest();
+                let comentarios_por_post = new XMLHttpRequest();    
                 comentarios_por_post.open("GET", `https://jsonplaceholder.typicode.com/posts/${post.id}/comments`);
                 comentarios_por_post.send();
                 comentarios_por_post.onload = function () {
@@ -75,11 +72,15 @@ function recuperarPost_Usuarios() {
                         comentarios.forEach(comentario => {
                             let comentarioLi = document.createElement("li");
                             comentarioLi.classList.add("list-group-item");
+                            comentarioLi.style.fontWeight = "bold";
                             comentarioLi.textContent = comentario.body;
-                            lista_comentarios.appendChild(comentarioLi);
+                            lista_post.appendChild(postLi);
+                            lista_post.appendChild(comentarioLi);
                         });
                     }
                 };
+                
+                
             });
             
             // ELIMINO TANTO LA LISTA ANTERIOR PARA QUE NO SE SUPERPONGAN COMO EL H3
@@ -96,7 +97,6 @@ function recuperarPost_Usuarios() {
             document.body.appendChild(h3_posts);
             document.body.appendChild(lista_post);
             document.body.appendChild(h3_comentarios);
-            document.body.appendChild(lista_comentarios);
         }
     };
 }
