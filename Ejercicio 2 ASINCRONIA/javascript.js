@@ -1,102 +1,116 @@
 document.addEventListener("DOMContentLoaded", () => {
-    let select = document.createElement("select");
-    crearselect(select);
-    select.addEventListener("change", recuperarPost_Usuarios);
+    const select_completo = document.getElementById("userSelect");
+
+    // Cargar usuarios en el select
+    cargarUsuarios(select_completo);
+
+    // Evento change del select
+    select_completo.addEventListener("change", () => {
+        const userId = select_completo.value;
+        mostrarPostsYComentarios(userId);
+    });
 });
 
-// FUNCION PARA CREAR EL SELECT CON LOS IDS DE LOS USUARIOS
-function crearselect(select) {
-    let posts = new XMLHttpRequest();
-    let userIds = new Set(); // HAGO UN SET PARA QUE NO SE REPITAN LOS ID
-    posts.open("GET", "https://jsonplaceholder.typicode.com/posts");
-    posts.send();
-    posts.onload = function () {
-        if (posts.status != 200) {
-            alert(`Error ${posts.status}: ${posts.statusText}`);
-        } else {
-            // AÑADO LOS ID DE LOS USUARIOS AL SET PARA QUE NO SE REPITAN LOS VALORES
-            JSON.parse(posts.responseText).forEach(post => {
-                userIds.add(post.userId);
+// Función para cargar los usuarios en el select
+function cargarUsuarios(select) {
+    fetch("https://jsonplaceholder.typicode.com/users")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(usuarios => {
+            usuarios.forEach(usuario => {
+                const option = document.createElement("option");
+                option.textContent = usuario.name;
+                option.value = usuario.id;
+                select.appendChild(option);
             });
-            // LUEGO LO TRANSFORMO EN UN ARRAY
-            usuarios_en_Select(Array.from(userIds), select);
-        }
-    };
+        })
+        .catch(error => {
+            alert(error.message);
+        });
 }
 
-// Relleno el select con la informacion del array
-function usuarios_en_Select(arrayC, select) {
-    arrayC.forEach(userId => {
-        let option = document.createElement("option");
-        option.textContent = userId;
-        option.setAttribute("value", userId);
-        select.appendChild(option);
-    });
-    document.body.appendChild(select);
-}
+// Función para mostrar los posts y comentarios del usuario seleccionado
+function mostrarPostsYComentarios(userId) {
+    const div = document.getElementById("postsContainer");
+    div.innerHTML = ""; // Limpiar contenido anterior
 
-// FUNCION PARA RECUPERAR LOS POST DEL USUARIO Y SUS COMENTARIOS Y IMPRIMIRLOS POR PANTALLA
-function recuperarPost_Usuarios() {
-    let usuario = this.options[this.selectedIndex].value;
-
-    // CREO LA LISTA PARA PONER LOS POSTS
-    let lista_post = document.createElement("ol");
-    lista_post.classList.add("list-group", "list-group-flush");
-    lista_post.innerHTML = "";
-    //FIN DE LISTAS
-
-    //RECOJO LOS POST
-    let post_por_usuario = new XMLHttpRequest();
-    post_por_usuario.open("GET", `https://jsonplaceholder.typicode.com/posts?userId=${usuario}`);
-    post_por_usuario.send();
-    post_por_usuario.onload = function () {
-        if (post_por_usuario.status != 200) {
-            alert(`Error ${post_por_usuario.status}: ${post_por_usuario.statusText}`);
-        } else {
-            let h3_posts = document.createElement("h3");
-            h3_posts.textContent = `Los posts del usuario con id=${usuario} son:`;
-            h3_posts.classList.add("card-title");
-            let posts = JSON.parse(post_por_usuario.responseText);
+    fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(posts => {
             posts.forEach(post => {
-                let postLi = document.createElement("li");
-                postLi.classList.add("list-group-item");
-                postLi.textContent = post.title;
+                const postCard = document.createElement("div");
+                postCard.classList.add("col-md-6", "mb-3");
+                postCard.innerHTML = `
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${post.title}</h5>
+                            <p class="card-text">${post.body}</p>
+                        </div>
+                    </div>
+                `;
 
-                // Para cada post, obtengo sus comentarios
-                let comentarios_por_post = new XMLHttpRequest();    
-                comentarios_por_post.open("GET", `https://jsonplaceholder.typicode.com/posts/${post.id}/comments`);
-                comentarios_por_post.send();
-                comentarios_por_post.onload = function () {
-                    if (comentarios_por_post.status === 200) {
-                        let comentarios = JSON.parse(comentarios_por_post.responseText);
-                        comentarios.forEach(comentario => {
-                            let comentarioLi = document.createElement("li");
-                            comentarioLi.classList.add("list-group-item");
-                            comentarioLi.style.fontWeight = "bold";
-                            comentarioLi.textContent = comentario.body;
-                            lista_post.appendChild(postLi);
-                            lista_post.appendChild(comentarioLi);
+                fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Error ${response.status}: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(comentario => {
+                        const listacomentarios = document.createElement("ul");
+                        listacomentarios.classList.add("list-group", "list-group-flush");
+                        comentario.forEach(comment => {
+                            const comentario_li = document.createElement("li");
+                            comentario_li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+                            comentario_li.innerHTML = `
+                                <span>${comment.body}</span>
+                                <button type="button" class="btn btn-danger btn-sm m-3 eliminar">Eliminar</button>
+                                <button type="button" class="btn btn-primary btn-sm m-3 modificar">Modificar</button>
+                            `;
+                            comentario_li.querySelector(".eliminar").addEventListener("click", () => {
+                                eliminarComentario(comentario_li);
+                            });
+                            comentario_li.querySelector(".modificar").addEventListener("click", () => {
+                                modificarComentario(comentario_li);
+                            });
+                            listacomentarios.appendChild(comentario_li);
                         });
-                    }
-                };
-                
-                
-            });
-            
-            // ELIMINO TANTO LA LISTA ANTERIOR PARA QUE NO SE SUPERPONGAN COMO EL H3
-            let listas_anteriores = document.querySelectorAll("ol");
-            listas_anteriores.forEach(lista => {
-                lista.remove();
-            });
 
-            let h3s_anteriores = document.querySelectorAll("h3");
-            h3s_anteriores.forEach(h3 => {
-                h3.remove();
-            });
+                        const cardBody = postCard.querySelector(".card-body");
+                        cardBody.appendChild(listacomentarios);
+                    })
+                    .catch(error => {
+                        alert(error.message);
+                    });
 
-            document.body.appendChild(h3_posts);
-            document.body.appendChild(lista_post);
-            document.body.appendChild(h3_comentarios);
-        }
-    };
+                div.appendChild(postCard);
+            });
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+}
+
+
+// Función para eliminar un comentario
+function eliminarComentario(li) {
+    li.remove();
+}
+
+function modificarComentario(li) {
+    let frase = prompt("Que quieres modificar");
+    li.innerHTML = `
+        <span>${frase}</span>
+        <button type="button" class="btn btn-danger btn-sm m-3 eliminar">Eliminar</button>
+        <button type="button" class="btn btn-primary btn-sm m-3 modificar">Modificar</button>
+    `;
 }
