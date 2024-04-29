@@ -49,6 +49,7 @@ function mostrarPostsYComentarios(userId) {
             posts.forEach(post => {
                 const postCard = document.createElement("div");
                 postCard.classList.add("col-md-6", "mb-3");
+                postCard.setAttribute("id", "divprincipal");
                 postCard.innerHTML = `
                     <div class="card">
                         <div class="card-body">
@@ -80,7 +81,7 @@ function mostrarPostsYComentarios(userId) {
                                 eliminarComentario(comentario_li);
                             });
                             comentario_li.querySelector(".modificar").addEventListener("click", () => {
-                                modificarComentario(comentario_li);
+                                modificarComentario(comentario_li, comment.id);
                             });
                             listacomentarios.appendChild(comentario_li);
                         });
@@ -91,13 +92,14 @@ function mostrarPostsYComentarios(userId) {
                     .catch(error => {
                         alert(error.message);
                     });
-
                 div.appendChild(postCard);
             });
         })
         .catch(error => {
             alert(error.message);
         });
+
+
 }
 
 
@@ -106,11 +108,25 @@ function eliminarComentario(li) {
     li.remove();
 }
 
-function modificarComentario(li) {
-    let frase = prompt("Que quieres modificar");
-    li.innerHTML = `
-        <span>${frase}</span>
-        <button type="button" class="btn btn-danger btn-sm m-3 eliminar">Eliminar</button>
-        <button type="button" class="btn btn-primary btn-sm m-3 modificar">Modificar</button>
-    `;
+function modificarComentario(li, id) {
+    let mensaje = prompt("Dime qué quieres cambiar");
+    fetch(`https://jsonplaceholder.typicode.com/comments/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+            body: mensaje,
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+    })
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+            alert("Cambio efectuado");
+            li.querySelector("span").textContent = mensaje;
+        })
+        .catch(error => {
+            console.error("Error al modificar comentario:", error);
+            alert("Error al modificar comentario");
+        });
 }
