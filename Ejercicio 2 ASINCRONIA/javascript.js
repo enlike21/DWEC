@@ -110,7 +110,7 @@ function eliminarComentario(li) {
 
 function modificarComentario(li, id) {
     let mensaje = prompt("Dime qué quieres cambiar");
-    fetch(`https://jsonplaceholder.typicode.com/comments/${id}`, {
+    fetch(`https://jsonplaceholder.typicode.com/comments/hola`, {
         method: "PUT",
         body: JSON.stringify({
             body: mensaje,
