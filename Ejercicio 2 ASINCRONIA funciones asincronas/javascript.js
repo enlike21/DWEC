@@ -22,7 +22,6 @@ async function cargarUsuarios(select) {
                 select.appendChild(option);
             });
 }
-cargarUsuarios().catch(alert);
 
 // Función para mostrar los posts y comentarios del usuario seleccionado
 async function mostrarPostsYComentarios(userId) {
@@ -73,7 +72,6 @@ async function mostrarPostsYComentarios(userId) {
         div.appendChild(postCard);
     });
 }
-mostrarPostsYComentarios().catch(alert);
 
 
 
@@ -82,9 +80,9 @@ function eliminarComentario(li) {
     li.remove();
 }
 
-function modificarComentario(li, id) {
+async function modificarComentario(li, id) {
     let mensaje = prompt("Dime qué quieres cambiar");
-    fetch(`https://jsonplaceholder.typicode.com/comments/${id}`, {
+    let json = {
         method: "PUT",
         body: JSON.stringify({
             body: mensaje,
@@ -92,15 +90,10 @@ function modificarComentario(li, id) {
         headers: {
             "Content-type": "application/json; charset=UTF-8",
         },
-    })
-        .then(response => response.json())
-        .then(json => {
-            console.log(json);
+    }
+    let enviar = await fetch(`https://jsonplaceholder.typicode.com/comments/${id}`, json);
+    let respuesta = await enviar.json();
+            console.log(respuesta);
             alert("Cambio efectuado");
-            li.querySelector("span").textContent = mensaje;
-        })
-        .catch(error => {
-            console.error("Error al modificar comentario:", error);
-            alert("Error al modificar comentario");
-        });
+            li.querySelector("span").textContent = respuesta.body;
 }
