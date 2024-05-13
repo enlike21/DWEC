@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Episodios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        #character-info {
+            margin-top: 20px;
+        }
+
+        #character-image {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        #character-details {
+            margin-left: 20px;
+        }
+
+        .total-episodes {
+            font-weight: bold;
+            color: #0275d8;
+        }
+
+        .table-hover tbody tr:hover {
+            cursor: pointer;
+        }
+    </style>
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="script.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="mb-4">Episodios Rick and Morty</h1>
+        <div class="row">
+            <div class="col-md-6"> <!-- Tamaño ajustable según necesidad -->
+                <label for="character" class="form-label">Selecciona un personaje:</label>
+                <div id="characterTableContainer"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="character-info"></div>
+                <div id="episode-list"></div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
